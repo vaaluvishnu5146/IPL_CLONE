@@ -10,6 +10,7 @@
  * WHICH REGITERS ALL THE FUNCTIONALITIES
  */
 const router = require("express").Router();
+const { response } = require("express");
 const TeamModel = require("../Model/Team.model");
 
 /**
@@ -129,6 +130,32 @@ router.post("/createTeam", (req, res, next) => {
         error: error,
       })
     );
+});
+
+/**
+ * UPDATE THE IPL TEAM
+ * INPUT - TEAM DATA TO UPDATE
+ * OUTPUT - UPDATED TEAM DATA
+ * PATH - '/:id'
+ */
+router.put("/:id", (req, res, next) => {
+  const { id } = req.params;
+  TeamModel.findByIdAndUpdate(id, req.body, { new: true })
+    .then((response) => {
+      if (response) {
+        return res.status(200).json({
+          message: "Team updated successfully",
+          data: response,
+        });
+      }
+    })
+    .catch((error) => {
+      if (error.message) {
+        return res.status(400).json({
+          error: error.message,
+        });
+      }
+    });
 });
 
 module.exports = router;
