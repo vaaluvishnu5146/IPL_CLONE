@@ -16,6 +16,14 @@ const TeamSchema = mongoose.Schema({
     type: String,
     required: false,
   },
+  teamLogo: {
+    type: String,
+    required: false,
+  },
+  teamBanner: {
+    type: String,
+    required: false,
+  },
   colorCode: {
     type: String,
     required: true,

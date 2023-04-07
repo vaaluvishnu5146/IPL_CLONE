@@ -78,7 +78,7 @@ router.get("/", (req, res, next) => {
           message: "Players fetched successfully",
           count: response.length,
           pageNumber: 1,
-          data: response,
+          response: response,
         });
       } else {
         return res.status(200).json({

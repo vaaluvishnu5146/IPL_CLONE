@@ -10,7 +10,6 @@
  * WHICH REGITERS ALL THE FUNCTIONALITIES
  */
 const router = require("express").Router();
-const { response } = require("express");
 const TeamModel = require("../Model/Team.model");
 
 /**
@@ -93,6 +92,8 @@ router.post("/createTeam", (req, res, next) => {
   const {
     teamName = "",
     teamShortName = "",
+    teamLogo = "",
+    teamBanner = "",
     colorCode = "",
     totalPlayers = 0,
     totalSubstitutes = 0,
@@ -106,6 +107,8 @@ router.post("/createTeam", (req, res, next) => {
   const Team = new TeamModel({
     teamName,
     teamShortName,
+    teamLogo,
+    teamBanner,
     colorCode,
     totalPlayers,
     totalSubstitutes,

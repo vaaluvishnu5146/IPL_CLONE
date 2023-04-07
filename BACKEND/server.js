@@ -19,6 +19,11 @@ dotenv.config();
 require("./dbconfig");
 
 /**
+ * CONFIGURING THE CORS
+ */
+server.use(cors());
+
+/**
  * IMPORT AND REGISTER THE EXPRESS APPLICATION
  */
 server.use("/", app);
