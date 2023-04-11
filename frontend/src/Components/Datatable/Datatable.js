@@ -10,7 +10,13 @@ export default function DataTable({
 
   useEffect(() => {
     if (data.length > 0) {
-      const keys = Object.keys(data[0]);
+      const keys = Object.keys(data[0]).map((_k) => {
+        return {
+          id: _k,
+          isActive: keysToAvoid.indexOf(_k) < 0 ? true : false,
+          label: _k,
+        };
+      });
       setHeader(keys);
     }
     return () => {};
@@ -31,7 +37,7 @@ export default function DataTable({
         value = "NO";
       }
     } else if (typeof data === "object") {
-      return null;
+      value = JSON.stringify(data);
     } else {
       value = data;
     }
@@ -45,23 +51,24 @@ export default function DataTable({
           <table class="table table-striped table-hover table-bordered">
             <thead>
               <tr>
-                {header.length > 0
-                  ? header.map((h, i) => {
-                      if (keysToAvoid.indexOf(h) < 0) {
-                        return (
-                          <th
-                            key={`data-table-header-${i}`}
-                            scope="col"
-                            style={{
-                              textTransform: "capitalize",
-                            }}
-                          >
-                            {h}
-                          </th>
-                        );
-                      }
-                    })
-                  : null}
+                {header.length > 0 &&
+                  header.map((_e, i) => {
+                    if (_e.isActive) {
+                      return (
+                        <th
+                          key={`data-table-header-${i}`}
+                          scope="col"
+                          style={{
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          {_e.label}
+                        </th>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })}
               </tr>
             </thead>
             <tbody>
@@ -69,42 +76,13 @@ export default function DataTable({
                 data.map((d, i) => (
                   <tr key={`data-table-row-${i}`}>
                     {header.map((h, i) => {
-                      if (keysToAvoid.indexOf(h) < 0) {
-                        return <td key={i}>{renderData(d[h])}</td>;
+                      if (h.isActive) {
+                        return <td key={i}>{renderData(d[h.label])}</td>;
                       } else {
                         return null;
                       }
                     })}
-                    <td>
-                      <div
-                        class="btn-group"
-                        role="group"
-                        aria-label="Basic example"
-                      >
-                        <button
-                          type="button"
-                          class="btn btn-primary"
-                          onClick={() => handleOptions("addFood", d._id)}
-                        >
-                          Add Food
-                        </button>
-                        <button type="button" class="btn btn-warning">
-                          Manage Foods
-                        </button>
-                        <button
-                          type="button"
-                          class="btn btn-info"
-                          onClick={() =>
-                            handleOptions("updateRestaurant", d._id)
-                          }
-                        >
-                          Update Restaurant
-                        </button>
-                        <button type="button" class="btn btn-danger">
-                          Delete Restaurant
-                        </button>
-                      </div>
-                    </td>
+                    <td>Actions</td>
                   </tr>
                 ))}
             </tbody>

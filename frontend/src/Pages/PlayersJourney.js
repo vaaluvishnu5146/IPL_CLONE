@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DataTable from "../Components/Datatable/Datatable";
+import axios from "axios";
 
 /**
  *
@@ -7,21 +8,23 @@ import DataTable from "../Components/Datatable/Datatable";
  */
 export default function PlayersJourney() {
   const [teams, setTeams] = useState([]);
+
+  async function fetchPlayerData() {
+    const result = await axios.get(
+      `http://${process.env.REACT_APP_HOST_NAME}${process.env.REACT_APP_GET_ALL_PLAYERS_PATH}`
+    );
+    const { data = {}, status = 0, statusText = "" } = result;
+    if (status == 200 && statusText == "OK") {
+      const { response = [] } = data;
+      setTeams(response);
+    }
+  }
+
   /**
    * HOOKS THAT RUNS WHEN A COMPONENT RENDERS FOR FIRST TIME
    */
   useEffect(() => {
-    fetch(
-      `http://${process.env.REACT_APP_HOST_NAME}${process.env.REACT_APP_GET_ALL_PLAYERS_PATH}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const { message = "", response = [] } = data;
-        if (message && response) {
-          setTeams(response);
-        }
-      })
-      .catch((err) => console.log(err));
+    fetchPlayerData();
     return () => {
       setTeams([]);
     };
@@ -35,12 +38,18 @@ export default function PlayersJourney() {
           id="app-page-content-area-header"
           className="app-page-content-area-header"
         >
-          <h3>Listing IPL 2023 Teams</h3>
+          <h3>Listing IPL 2023 Players</h3>
         </div>
         <DataTable
           data={teams}
           message="No Teams Found"
-          keysToAvoid={["_id", "__v", "teamBanner"]}
+          keysToAvoid={[
+            "_id",
+            "__v",
+            "teamBanner",
+            "battingDetails",
+            "bowlingDetails",
+          ]}
         />
       </div>
     </div>

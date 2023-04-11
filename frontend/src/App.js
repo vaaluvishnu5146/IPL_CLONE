@@ -4,6 +4,7 @@ import TeamsJourney from "./Pages/TeamsJourney";
 import "./Theme/style.css";
 import AppLayout from "./Theme/AppLayout";
 import PlayersJourney from "./Pages/PlayersJourney";
+import CreateTeam from "./Pages/CreateTeam";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <AppLayout>
         <Routes>
           <Route path="teams" Component={TeamsJourney} />
+          <Route path="createTeam" Component={CreateTeam} />
           <Route path="players" Component={PlayersJourney} />
         </Routes>
       </AppLayout>

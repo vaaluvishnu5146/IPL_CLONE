@@ -76,6 +76,7 @@ img {
   background: #f7f7f7;
   padding: 20px;
   box-sizing: border-box;
+  overflow-y: scroll;
 }
 
 .app-page-banner {
@@ -96,4 +97,21 @@ img {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+/* APP PAGE CONTENT HEADER */
+
+.app-page-content-area-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.header-start {
+  width: 50%;
+}
+
+.header-end {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 50%;
 }
