@@ -21,7 +21,7 @@ export default function CreateTeam() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            // 'Content-Type': 'application/x-www-form-urlencoded',
+            "Content-Type": "application/x-www-form-urlencoded",
           },
           body: JSON.stringify(team),
         }
