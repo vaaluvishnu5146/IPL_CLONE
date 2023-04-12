@@ -3,20 +3,20 @@ import { createSlice } from "@reduxjs/toolkit";
 const TeamsSlice = createSlice({
   name: "Teams",
   initialState: {
-    isLoading: true,
+    isLoading: false,
     data: [],
   },
   reducers: {
     saveTeams: (state, action = {}) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
+      state.data = [];
       state.data.push(...action.payload);
+    },
+    setLoading: (state, action = {}) => {
+      state.isLoading = action.payload;
     },
   },
 });
 
-export const { saveTeams } = TeamsSlice.actions;
+export const { saveTeams, setLoading } = TeamsSlice.actions;
 
 export default TeamsSlice.reducer;

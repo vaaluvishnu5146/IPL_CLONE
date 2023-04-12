@@ -123,7 +123,12 @@ export default function CreateTeam() {
         onChange={handleInput}
         type="text"
       />
-
+      <input
+        type="date"
+        id="date"
+        onChange={handleInput}
+        min={new Date().toISOString().split("T")[0]}
+      />
       <button className="btn btn-danger">Reset Form</button>
       <button className="btn btn-primary" onClick={handleCreateTeam}>
         Create Team
