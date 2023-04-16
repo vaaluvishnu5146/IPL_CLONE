@@ -1,13 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import TeamsReducer from "./Reducers/Teams.reducer";
-import PlayersReducer from "./Reducers/Players.reducer";
-import MatchReducer from "./Reducers/Match.reducer";
+import TodoReducer from "./Reducers/Todo.reducer";
 
 export default configureStore({
   // ROOT REDUCER
   reducer: {
-    teams: TeamsReducer,
-    players: PlayersReducer,
-    matches: MatchReducer,
+    // REGISTER REDUCERS HERE
+    todos: TodoReducer,
   },
 });
