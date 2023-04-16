@@ -115,3 +115,27 @@ img {
   flex-direction: row-reverse;
   width: 50%;
 }
+
+/* LIST VIEW COMPONENT */
+
+.list-group-item {
+  margin: 0 0 10px 0;
+  height: auto;
+  border: var(--bs-list-group-border-width) solid
+    var(--bs-list-group-border-color);
+}
+
+.team-logo-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid var(--teritiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-logo-circle > img {
+  width: 50px;
+  height: auto;
+}

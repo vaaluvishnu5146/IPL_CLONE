@@ -10,6 +10,9 @@ export default function AppLayout({ children }) {
           <img src={imagesMock.IPL_LOGO} alt="ipl-logo" />
         </div>
         <div className="link-container">
+          <Link className="sidebar-link" to={"/matches"}>
+            Matches
+          </Link>
           <Link className="sidebar-link" to={"/teams"}>
             Teams
           </Link>
